@@ -222,7 +222,7 @@ export const iconSuccessPlaceholder: CSSProperties = {
 };
 
 export const iconSuccessFix: CSSProperties = {
-  width: 5,
+  width: 6,
   height: 90,
   backgroundColor: "#fff",
   position: "absolute",
