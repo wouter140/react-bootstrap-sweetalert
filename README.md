@@ -222,7 +222,27 @@ Related projects
 
 Development
 --------
-
+####Build:
+To build Sweetalert.
 ``` bash
-yarn dev && open http://localhost:3000
+yarn build     // Linux
+yarn build-win // Windows
+```
+
+---
+
+####Build demo page and run:
+To build and run the demo page. Required Sweetalert to be build. This will also setup a local dev server. 
+The demo page will be available at ``http://localhost:3000``
+``` bash
+yarn demo
+```
+
+---
+
+####Build Sweetalert, build demo page and run:
+To build Sweetalert, then build the demo page and then run it. Both of the above together.
+``` bash
+yarn demo-build-run     // Linux
+yarn demo-build-run-win // Windows
 ```
