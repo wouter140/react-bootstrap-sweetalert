@@ -80,6 +80,7 @@ export interface SweetAlertOptionalProps extends  SweetAlertOptionalPropsWithDef
   defaultValue?: string,
   showConfirm?: boolean,
   showCancel?: boolean,
+  customContainerStyle?: CSSProperties,
   footer?: React.ReactNode|string|boolean,
   customFooterStyle?: CSSProperties,
 }
@@ -141,6 +142,7 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
     style: PropTypes.object,
     closeBtnStyle: PropTypes.object,
     customClass: PropTypes.string,
+    customContainerStyle: PropTypes.object,
     showConfirm: PropTypes.bool,
     showCancel: PropTypes.bool,
     showCloseButton: PropTypes.bool,
@@ -420,6 +422,7 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
           show={!this.props.hideOverlay}
           onClick={this.onClickOutside}
           onKeyDown={this.onKeyDown}
+          customContainerStyle={this.props.customContainerStyle}
         >
 
           <div

@@ -1,10 +1,11 @@
-import React  from "react";
+import React, {CSSProperties} from "react";
 import { overlay as overlayStyle, sweetAlertContainer as containerStyle } from "../styles/SweetAlertStyles";
 
 export default class Overlay extends React.Component<{
   show: boolean;
   onClick: Function;
   onKeyDown: Function;
+  customContainerStyle: CSSProperties;
 }> {
 
   private overlayElement: HTMLDivElement = null;
@@ -20,11 +21,11 @@ export default class Overlay extends React.Component<{
   };
 
   render() {
-    const { show, onClick, onKeyDown, children } = this.props;
+    const { show, onClick, onKeyDown, children, customContainerStyle } = this.props;
     return show ? (
       <div
         ref={this.setOverlayElementRef}
-        style={{...overlayStyle, ...containerStyle}}
+        style={Object.assign({}, overlayStyle, containerStyle, customContainerStyle)}
         onClick={(e) => onClick(e)}
         tabIndex={0}
         onKeyDown={(e) => onKeyDown(e)}
