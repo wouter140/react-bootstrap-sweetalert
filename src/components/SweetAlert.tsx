@@ -45,7 +45,7 @@ export interface SweetAlertOptionalPropsWithDefaults {
   timeout?: number;
 }
 
-export type SweetAlertType = 'default'|'secondary'|'info'|'success'|'warning'|'danger'|'error'|'input'|'custom';
+export type SweetAlertType = 'default'|'secondary'|'info'|'success'|'warning'|'danger'|'error'|'input'|'custom'|'chained';
 
 export interface SweetAlertOptionalProps extends  SweetAlertOptionalPropsWithDefaults {
   type?: SweetAlertType,
@@ -59,6 +59,11 @@ export interface SweetAlertOptionalProps extends  SweetAlertOptionalPropsWithDef
   error?: boolean;
   input?: boolean;
   custom?: boolean;
+
+  chained?: boolean|number;
+  chainedIndex?: number,
+  activeChainedIndex?: number,
+  chainedNavigation?: Function,
 
   onCancel?: Function,
   confirmBtnText?: React.ReactNode|string,
@@ -107,6 +112,11 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
     error: PropTypes.bool,
     input: PropTypes.bool,
     custom: PropTypes.bool,
+
+    chained: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+    chainedIndex: PropTypes.number,
+    activeChainedIndex: PropTypes.number,
+    chainedNavigation: PropTypes.func,
 
     title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
     onCancel: PropTypes.func,
@@ -257,6 +267,7 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
 
   getTypeFromProps = (props: SweetAlertProps) => {
     if (props.type) return props.type;
+    if (props.chained) return 'chained';
     if (props.secondary) return 'secondary';
     if (props.info) return 'info';
     if (props.success) return 'success';
@@ -292,6 +303,34 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
             return <CustomIcon iconUrl={this.props.customIcon} />
           }
           return this.props.customIcon;
+        }
+        return null;
+      case 'chained':
+        if(typeof this.props.chained === "number") {
+          let chainedSteps = [
+              <li style={Object.assign({}, styles.chainedProgressStep, 0 <= this.props.activeChainedIndex && styles.chainedProgressStepActive)}
+                  onClick={ typeof this.props.chainedNavigation === "function" ? () => this.props.chainedNavigation(0) : null }
+              >
+                1
+              </li>
+          ];
+          for(let i = 1; i < this.props.chained; i++) {
+            chainedSteps.push(
+                <React.Fragment>
+                  <li style={Object.assign({}, styles.chainedStepLine, i <= this.props.activeChainedIndex && styles.chainedStepLineActive)}/>
+                  <li style={Object.assign({}, styles.chainedProgressStep, i <= this.props.activeChainedIndex && styles.chainedProgressStepActive)}
+                      onClick={ this.props.activeChainedIndex > i && typeof this.props.chainedNavigation === "function" ? () => this.props.chainedNavigation(i) : null }
+                  >
+                    { i + 1 }
+                  </li>
+                </React.Fragment>
+            );
+          }
+          return (
+              <ul style={Object.assign({}, styles.chainedStepsContainer)}>
+                { chainedSteps }
+              </ul>
+          );
         }
         return null;
       default:
@@ -358,7 +397,7 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
   };
 
   render() {
-    if (!this.props.show) {
+    if (!this.props.show || (this.props.chained && typeof this.props.chained !== "boolean" && this.props.activeChainedIndex !== this.props.chainedIndex)) {
       return false;
     }
     return (

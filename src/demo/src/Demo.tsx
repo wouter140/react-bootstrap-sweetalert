@@ -16,6 +16,8 @@ window.SweetAlert = SweetAlert;
 interface DemoState {
 	alert: React.ReactNode;
 	textareaValue: string;
+	chainedModalShow: boolean;
+	chainedModalIndex: number;
 }
 
 const defaultTextAreaValue: string = `
@@ -33,6 +35,8 @@ export default class Demo extends React.Component<{}, DemoState> {
 	state: DemoState = {
 		alert: null,
 		textareaValue: defaultTextAreaValue,
+		chainedModalShow: false,
+		chainedModalIndex: 0
 	};
 
 	renderHeader = () => {
@@ -293,6 +297,52 @@ export default class Demo extends React.Component<{}, DemoState> {
 						</div>
 					))}
 
+					<div>
+						<h4>Chained Example</h4>
+						<Row>
+							<Col sm={2} className="text-center">
+								<p>
+									<Button bsStyle="primary" onClick={() => this.setState({chainedModalShow: true, chainedModalIndex: 0})} >
+										Try It
+									</Button>
+								</p>
+							</Col>
+							<Col sm={10}>
+								<pre>{
+									"<SweetAlert title=\"Chained Modal Test\" show={ this.state.chainedModalShow }\n    " +
+									"chained={3} chainedIndex={0} activeChainedIndex={ this.state.chainedModalIndex }\n    showCloseButton\n" +
+									"" +
+									"    onConfirm={ () => this.setState({chainedModalIndex: 1})}\n" +
+									"    onCancel={ () => this.setState({chainedModalShow: false}) }\n" +
+									"    chainedNavigation={ (index: number) => this.setState({chainedModalIndex: index}) }\n" +
+									">\n" +
+									"    This is step 1 in the Chained SweetAlert Modals.\n" +
+									"</SweetAlert>\n" +
+									"\n" +
+									"<SweetAlert title=\"Chained Modal Test\" show={ this.state.chainedModalShow }\n" +
+									"    chained={3} chainedIndex={1} activeChainedIndex={ this.state.chainedModalIndex }\n" +
+									"    showCloseButton\n" +
+									"    onConfirm={ () => this.setState({chainedModalIndex: 2})}\n" +
+									"    onCancel={ () => this.setState({chainedModalShow: false}) }\n" +
+									"    chainedNavigation={ (index: number) => this.setState({chainedModalIndex: index}) }\n" +
+									">\n" +
+									"    This is step 2 in the Chained SweetAlert Modals.\n" +
+									"</SweetAlert>\n" +
+									"\n" +
+									"<SweetAlert title=\"Chained Modal Test\" show={ this.state.chainedModalShow }\n" +
+									"    chained={3} chainedIndex={2} activeChainedIndex={ this.state.chainedModalIndex }\n" +
+									"    showCloseButton\n" +
+									"    onConfirm={ () => this.setState({chainedModalShow: false}) }\n" +
+									"    onCancel={ () => this.setState({chainedModalShow: false}) }\n" +
+									"    chainedNavigation={ (index: number) => this.setState({chainedModalIndex: index}) }\n" +
+									">\n" +
+									"    This is step 3 in the Chained SweetAlert Modals.\n" +
+									"</SweetAlert>"
+								}</pre>
+							</Col>
+						</Row>
+					</div>
+
 				</div>
 
 			    <footer>
@@ -302,6 +352,35 @@ export default class Demo extends React.Component<{}, DemoState> {
 			    </footer>
 
 			    {this.state.alert}
+
+
+				<SweetAlert title="Chained Modal Test" show={ this.state.chainedModalShow }
+							chained={3} chainedIndex={0} activeChainedIndex={ this.state.chainedModalIndex }
+							showCloseButton
+							onConfirm={ () => this.setState({chainedModalIndex: 1})}
+							onCancel={ () => this.setState({chainedModalShow: false}) }
+							chainedNavigation={ (index: number) => this.setState({chainedModalIndex: index}) }
+				>
+					This is step 1 in the Chained SweetAlert Modals.
+				</SweetAlert>
+				<SweetAlert title="Chained Modal Test" show={ this.state.chainedModalShow }
+							chained={3} chainedIndex={1} activeChainedIndex={ this.state.chainedModalIndex }
+							showCloseButton
+							onConfirm={ () => this.setState({chainedModalIndex: 2})}
+							onCancel={ () => this.setState({chainedModalShow: false}) }
+							chainedNavigation={ (index: number) => this.setState({chainedModalIndex: index}) }
+				>
+					This is step 2 in the Chained SweetAlert Modals.
+				</SweetAlert>
+				<SweetAlert title="Chained Modal Test" show={ this.state.chainedModalShow }
+							chained={3} chainedIndex={2} activeChainedIndex={ this.state.chainedModalIndex }
+							showCloseButton
+							onConfirm={ () => this.setState({chainedModalShow: false}) }
+							onCancel={ () => this.setState({chainedModalShow: false}) }
+							chainedNavigation={ (index: number) => this.setState({chainedModalIndex: index}) }
+				>
+					This is step 3 in the Chained SweetAlert Modals.
+				</SweetAlert>
 			</div>
 		);
 	}

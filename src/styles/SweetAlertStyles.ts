@@ -339,6 +339,45 @@ export const closeButton: CSSProperties = {
   color: "rgb(113, 113, 113)"
 };
 
+export const chainedStepsContainer: CSSProperties = {
+  alignItems: "center",
+  margin: "0 0 1.25em",
+  padding: 0,
+  background: "inherit",
+  fontWeight: 600
+};
+
+export const chainedStepLine: CSSProperties = {
+  display: "inline-block",
+  position: "relative",
+  zIndex: 10,
+  width: "2.5em",
+  height: "0.4em",
+  margin: "0 -1px",
+  background: "#add8e6"
+};
+export const chainedStepLineActive: CSSProperties = {
+  background: "#3085d6"
+};
+
+export const chainedProgressStep: CSSProperties = {
+  display: "inline-block",
+  position: "relative",
+  zIndex: 20,
+  width: "2em",
+  height: "2em",
+  borderRadius: "2em",
+  background: "#add8e6",
+  color: "#fff",
+  lineHeight: "2em",
+  textAlign: "center"
+};
+export const chainedProgressStepActive: CSSProperties = {
+  background: "#3085d6",
+  color: "#fff",
+  cursor: "pointer"
+};
+
 export const footerStyle: CSSProperties = {
   justifyContent: "center",
   margin: "1.25em 0 0",
