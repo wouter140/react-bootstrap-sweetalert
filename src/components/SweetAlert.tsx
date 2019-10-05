@@ -14,6 +14,7 @@ import ValidationMessage from './ValidationMessage';
 import Title from './Title';
 import Content from './Content';
 import Overlay from './Overlay';
+import Footer from "./Footer";
 
 // other
 import * as styles from '../styles/SweetAlertStyles';
@@ -74,6 +75,8 @@ export interface SweetAlertOptionalProps extends  SweetAlertOptionalPropsWithDef
   defaultValue?: string,
   showConfirm?: boolean,
   showCancel?: boolean,
+  footer?: React.ReactNode|string|boolean,
+  customFooterStyle?: CSSProperties,
 }
 
 export interface SweetAlertProps extends SweetAlertOptionalProps {
@@ -142,6 +145,8 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
     afterUpdate: PropTypes.func,
     beforeUnmount: PropTypes.func,
     timeout: PropTypes.number,
+    footer: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+    customFooterStyle: PropTypes.object,
   };
 
   static defaultProps: SweetAlertOptionalPropsWithDefaults = {
@@ -177,6 +182,7 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
   static ValidationMessage = ValidationMessage;
   static Title = Title;
   static Content = Content;
+  static Footer = Footer;
 
   state: SweetAlertState = {
     type: 'default',
@@ -414,6 +420,10 @@ export default class SweetAlert extends React.Component<SweetAlertProps, SweetAl
               type={this.state.type}
               onConfirm={this.onConfirm}
               focusConfirmBtn={this.state.focusConfirmBtn}
+            />
+
+            <Footer footer={this.props.footer}
+              customFooterStyle={this.props.customFooterStyle}
             />
 
           </div>

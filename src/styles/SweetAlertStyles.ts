@@ -338,3 +338,12 @@ export const closeButton: CSSProperties = {
   fontWeight: 900,
   color: "rgb(113, 113, 113)"
 };
+
+export const footerStyle: CSSProperties = {
+  justifyContent: "center",
+  margin: "1.25em 0 0",
+  padding: "1em 0 0",
+  borderTop: "1px solid #eee",
+  color: "#545454",
+  fontSize: "1em"
+};
