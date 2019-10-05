@@ -198,6 +198,7 @@ Configuration
 | style                  | no           | object       | {}                         | Style overrides applied to the sweetalert wrapper. |
 | closeBtnStyle          | no           | object       | {}                         | Style overrides applied to the X close button. |
 | customClass            | no           | string       | undefined                  | Custom CSS class applied to the sweetalert wrapper. |
+| customContainerStyle   | no           | object       | {}                         | Style overrides applied to the sweetalert container. |
 | showConfirm            | no           | bool         | true                       | If false, the confirm button will not show. |
 | showCancel             | no           | bool         | false                      | If true, the cancel button will show. |
 | allowEscape            | no           | bool         | true                       | If true, the onCancel function will be invoked when the user hits the ESCAPE key. |
