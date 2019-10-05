@@ -211,6 +211,8 @@ Configuration
 | afterUpdate            | no           | func         | noop                       | Hook which is invoked during componentDidUpdate. |
 | beforeUnmount          | no           | func         | noop                       | Hook which is invoked during componentWillUnmount. |
 | timeout                | no           | number       | 0                          | Call props.onConfirm to close the alert automatically after a certain number of milliseconds. |
+| footer                 | no           | string, node | false                      | The footer of the modal. Can be either a string or React Node. |
+| customFooterStyle      | no           | object       | {}                         | Style overrides applied to the footer. |
 
 Related projects
 ----------------
