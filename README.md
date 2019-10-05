@@ -213,6 +213,10 @@ Configuration
 | timeout                | no           | number       | 0                          | Call props.onConfirm to close the alert automatically after a certain number of milliseconds. |
 | footer                 | no           | string, node | false                      | The footer of the modal. Can be either a string or React Node. |
 | customFooterStyle      | no           | object       | {}                         | Style overrides applied to the footer. |
+| chained                | no           | bool, number | false                      | Number of chained SweetAlerts to enable chained alerts. |
+| chainedIndex           | no           | number       | undefined                  | The SweetAlert index this alert is in the chained SweetAlerts. |
+| activeChainedIndex     | no           | number       | undefined                  | The current active SweetAlert index in the chained SweetAlerts. |
+| chainedNavigation      | no           | func         | undefined                  | Hook which is invoked when clicking the chained number. Expected to navigate to the provided index passed to the function. |
 
 Related projects
 ----------------
